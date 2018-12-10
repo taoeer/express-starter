@@ -6,7 +6,6 @@ const fs = require('fs');
  */
 try {
   fs.mkdirSync('./log');
-  fs.mkdirSync('./upload');
 } catch (e) {
   if (e.code != 'EEXIST') {
     console.error('Could not set up log directory, error was: ', e);
