@@ -26,10 +26,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+app.use('*', (req, res, next) => {
+  res.append('Access-Control-Allow-Origin', req.get('origin'));
+  res.append('Access-Control-Allow-Credentials', true)
+  next();
+});
+
 app.use(rotues);
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'upload')));
+app.use('/upload', express.static(path.join(__dirname, 'upload')));
 
 
 

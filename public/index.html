@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Page Title</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-  <h1>hello</h1>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <input name="file" multiple type="file" id="upload">
+    <script>
+      var input = document.querySelector('#upload');
+      input.addEventListener('change', function (e) {
+        var files = [].slice.call(e.target.files);
+        var formData = new FormData();
+        files.forEach(function (file) {
+          formData.append('file', file, file.name);
+        });
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/upload', true);
+        xhr.send(formData);
+      })
+    </script>
+  </body>
 </html>
