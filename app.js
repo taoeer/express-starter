@@ -29,6 +29,7 @@ app.use(cookieParser());
 app.use('*', (req, res, next) => {
   res.append('Access-Control-Allow-Origin', req.get('origin'));
   res.append('Access-Control-Allow-Credentials', true)
+  res.append('Access-Control-Allow-Headers', 'x-token,content-type')
   next();
 });
 

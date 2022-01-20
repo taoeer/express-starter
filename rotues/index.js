@@ -10,8 +10,11 @@ router.all('/json', jsonTestController);
 
 router.get('/index', indexController);
 
-router.post('/upload', uploadController);
+router.post('/storage/uploadfile', uploadController);
 
 router.get('/error', errorController);
+
+router.post('/storage/superfile', require('../controllers/uploadSlice'));
+router.post('/storage/merge', require('../controllers/mergeUploadSlice'));
 
 module.exports = router;

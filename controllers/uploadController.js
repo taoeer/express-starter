@@ -4,10 +4,10 @@ const log4js = require('log4js');
 const Busboy = require('busboy');
 const logger = log4js.getLogger('uploadController');
 
-module.exports = function(req, res, next) {
+module.exports = function (req, res, next) {
   var busboy = new Busboy({ headers: req.headers });
   var filePath;
-  busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+  busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
     var now = new Date();
     var year = now.getFullYear();
     var month = `${now.getMonth() + 1}`.padStart(2, '0');
@@ -23,13 +23,14 @@ module.exports = function(req, res, next) {
       recursive: true,
     });
     const writeStream = fs.createWriteStream(filePath);
-    writeStream.on('error', e => {
+    writeStream.on('error', (e) => {
       next(e);
     });
     file.pipe(writeStream);
   });
-  busboy.on('finish', function() {
+  busboy.on('finish', function () {
     res.json({
+      code: 1,
       success: true,
       data: filePath.replace(process.cwd(), ''),
     });
